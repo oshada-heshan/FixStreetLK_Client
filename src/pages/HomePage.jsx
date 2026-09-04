@@ -1,4 +1,5 @@
 import { useState } from "react";
+import ReportModal from "../components/ReportModal";
 
 const issues = [
     {
@@ -193,6 +194,7 @@ function IssueCard({ issue }) {
 export default function HomePage() {
     const [selectedCategory, setSelectedCategory] = useState("All");
     const [search, setSearch] = useState("");
+    const [isReportModalOpen, setIsReportModalOpen] = useState(false);
 
     // Filter issues
     const filteredIssues = issues.filter((issue) => {
@@ -378,6 +380,7 @@ export default function HomePage() {
 
                     <button
                         type="button"
+                        onClick={() => setIsReportModalOpen(true)}
                         className="flex w-fit items-center gap-2 rounded-xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-blue-700"
                     >
                         <span className="text-lg">+</span>
@@ -628,6 +631,8 @@ export default function HomePage() {
                 </div>
 
             </footer>
+
+            {isReportModalOpen && <ReportModal onClose={() => setIsReportModalOpen(false)} />}
 
         </div>
     );
